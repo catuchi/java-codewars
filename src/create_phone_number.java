@@ -33,3 +33,6 @@ public class create_phone_number {
 	}
 
 }
+
+// Best practice
+// return String.format("(%d%d%d) %d%d%d-%d%d%d%d",numbers[0],...,numbers[9]);

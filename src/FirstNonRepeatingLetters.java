@@ -4,7 +4,7 @@ public class FirstNonRepeatingLetters {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String str = "moonmoon";
+		String str = "I Like To Take Candy From A Baby";
 		System.out.println(firstNonRepeatingLetter(str));
 	}
 	
@@ -12,21 +12,45 @@ public class FirstNonRepeatingLetters {
 		// scan through the letters
 		// at each index check remaining letters to see if any character matched current one
 		String lower = s.toLowerCase();
-		char[] charArray = lower.toCharArray();
-		char[] copyArr = s.toCharArray();
+		char[] lowerCaseArr = lower.toCharArray();
+		char[] charArray = s.toCharArray();
+		char targetChar;
+		char[] remainder;
+		char[] leftside;
 		int result;
-
-		for (int i = 0; i < s.length(); i++) {
-			char[] remainder = Arrays.copyOfRange(charArray, i + 1, charArray.length);
-			Arrays.sort(remainder);
-			result = Arrays.binarySearch(remainder, charArray[i]);
+		int result1;
+		int result2;
+		int result3;
+		
+//		for (char c : charArray) {
+//			if (c == targetChar) {
+//				return "true";
+//			}
+//		}
+		
+//		Arrays.sort(charArray);
+//		System.out.println(Arrays.binarySearch(charArray, targetChar));
+		
+//		System.out.println(IntStream.range(0, charArray.length).anyMatch(i -> charArray[i] == targetChar));
+		
+		for (int i = 0; i < charArray.length; i++) {
+			targetChar = lowerCaseArr[i];
 			
-			if (result < 0) {
-				String str = String.valueOf(copyArr[i]);
-				return str;
+			remainder = Arrays.copyOfRange(lowerCaseArr, i + 1, charArray.length);
+			leftside = Arrays.copyOfRange(lowerCaseArr, 0, i);
+			
+			Arrays.sort(remainder);
+			Arrays.sort(leftside);
+			
+			result = Arrays.binarySearch(remainder, lowerCaseArr[i]);
+			result1 = Arrays.binarySearch(remainder, Character.toUpperCase(targetChar));
+			result2 = Arrays.binarySearch(leftside, lowerCaseArr[i]);
+			result3 = Arrays.binarySearch(leftside, Character.toUpperCase(targetChar));
+			
+			if (result < 0 && result1 < 0 && result2 < 0 && result3 < 0) {
+				return Character.toString(charArray[i]);
 			}
 		}
-
 
 		return "";
 	}

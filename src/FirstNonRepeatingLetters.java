@@ -56,3 +56,31 @@ public class FirstNonRepeatingLetters {
 	}
 
 }
+
+// more efficient solution
+/*
+public static String firstNonRepeatingLetter(String s) {
+    // Use a LinkedHashMap to keep track of characters and their counts
+    Map<Character, Integer> charCountMap = new LinkedHashMap<>();
+    
+    // Convert the string to lowercase for case-insensitive comparison
+    String lower = s.toLowerCase();
+    
+    // Iterate over each character in the string
+    for (char c : lower.toCharArray()) {
+        charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+    }
+    
+    // Iterate over the original string to find the first non-repeating character
+    for (int i = 0; i < s.length(); i++) {
+        char c = lower.charAt(i);
+        if (charCountMap.get(c) == 1) {
+            // Return the original character to maintain the correct case
+            return Character.toString(s.charAt(i));
+        }
+    }
+    
+    // If no non-repeating character is found, return an empty string
+    return "";
+}
+*/
